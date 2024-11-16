@@ -1,0 +1,11 @@
+h1 {
+    color: rgb(249, 33, 202);
+}
+
+.text {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    color: rgba(229, 124, 5, 0.588);
+    margin-bottom: 20px;
+}

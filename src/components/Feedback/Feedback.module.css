@@ -1,0 +1,20 @@
+.wrapper {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.good {
+    color: green;
+}
+
+.neutral {
+    color: yellow
+}
+
+.bad {
+    color: red
+}
+
+.total {
+    color: white
+}

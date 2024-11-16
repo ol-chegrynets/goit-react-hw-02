@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.good {
+    background-color: green;
+}
+
+.neutral {
+    background-color: yellow
+}
+
+.bad {
+    background-color: red
+}
