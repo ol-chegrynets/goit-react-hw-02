@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Description from './components/Description/Description';
 import Options from './components/Options/Options';
@@ -7,19 +7,23 @@ import Notification from './components/Notification/Notification';
 import feedbackData from './db/feedbackData.json';
 
 function App() {
-  const [count, setCount] = useState(
-    () => JSON.parse(localStorage.getItem('count')) ?? feedbackData
-  );
+  const [feedback, setFeedback] = useState(() => {
+    const savedFeedback = localStorage.getItem('feedback');
+    return savedFeedback ? JSON.parse(savedFeedback) : feedbackData;
+  });
+  useEffect(() => {
+    localStorage.setItem('feedback', JSON.stringify(feedback));
+  });
   const updateFeedback = feedbackType => {
-    feedbackType === 'reset' && setCount(feedbackData);
+    feedbackType === 'reset' && setFeedback(feedbackData);
 
-    setCount(prev => ({
+    setFeedback(prev => ({
       ...prev,
       [feedbackType]: prev[feedbackType] + 1,
     }));
   };
-  const totalFeedback = count.good + count.neutral + count.bad;
-  const positiveFeedback = Math.round((count.good / totalFeedback) * 100);
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
 
   return (
     <div className="container">
@@ -29,7 +33,7 @@ function App() {
         <Notification />
       ) : (
         <Feedback
-          feedbackData={count}
+          feedbackData={feedback}
           totalFeedback={totalFeedback}
           positiveFeedback={positiveFeedback}
         />
